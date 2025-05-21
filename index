@@ -1,0 +1,17 @@
+mkdir airtable-mcp-render
+cd airtable-mcp-render
+# --- 1️⃣  minimal Dockerfile ---
+cat > Dockerfile <<'EOF'
+FROM node:20-alpine          # 20-LTS, small footprint
+WORKDIR /app
+ENV PORT=3333                # Render reads this automatically
+EXPOSE 3333
+# Run the published CLI each time the container boots
+CMD ["npx", "--yes", "airtable-mcp-server"]
+EOF
+# --------------------------------
+git init
+git add Dockerfile
+git commit -m "Render-ready Dockerfile"
+git remote add origin https://github.com/<your-gh-user>/airtable-mcp-render.git
+git push -u origin main
